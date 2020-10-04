@@ -1,0 +1,54 @@
+import React, { useContext, useEffect, useState } from 'react';
+import { OrganizationContext } from '../../App';
+import Nav from '../Nav/Nav';
+
+const UserContibutions = () => {
+    const [userParticipation, setUserParticipation] = useState([])
+    const [org, setOrg, loggedInUser, setLoggedInUser] = useContext(OrganizationContext);
+ 
+       
+    useEffect(() => {
+        fetch('http://localhost:5000/userorg?email='+loggedInUser.email)
+            .then(res => res.json())
+            .then(data => setUserParticipation(data))
+    },[loggedInUser.email])
+    
+    const deleteProduct = (id) => {
+        fetch(`http://localhost:5000/delete/${id}`, {
+            method: 'DELETE'
+         })
+         .then(res => res.json())
+         .then(result => {
+            console.log(result)
+            const newList=userParticipation.filter(u => u.id !== id)
+            setUserParticipation(newList)
+
+         })
+    }
+
+
+    return (
+        <div>
+            <Nav></Nav>
+            <div className="row ">
+            {userParticipation &&
+            userParticipation.map( u =>
+                 <div key = {u._id} className="card col-lg-4 col-md-6 col-sm-12 container" style={{width: "20rem"}}>
+                     <div className="col">
+                       <img className='' src={u.image} width="250px" height="150px" alt=""/>
+                     </div>
+                
+                     <div className="card-body col">
+                         <p className="card-text">{u.orgName}</p>
+                     </div>
+                     <button onClick={() => deleteProduct(`${u._id}`)} className="btn btn-danger">CANCEL</button>
+                  </div>
+                  
+            )}
+            </div>
+           
+            </div>
+    );
+};
+
+export default UserContibutions;

@@ -1,20 +1,27 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { OrganizationContext } from '../../App';
+import Banner from '../Banner/Banner';
 import Nav from '../Nav/Nav';
 import Organization from '../Organization/Organization';
 
 const Home = () => {
-    const [org, setOrg] = useContext(OrganizationContext);
-    console.log(org)
     
-   
+    const [org, setOrg, loggedInUser, setLoggedInUser] = useContext(OrganizationContext);
+     
+    useEffect(() => {
+        fetch('http://localhost:5000/organizations')
+          .then(res => res.json())
+          .then(data => setOrg(data))
+      }, [])
     return (
         <div>
             <Nav></Nav>
-            
-            {
-                org.map(orgs => <Organization orgs={orgs} key={orgs.id}></Organization>)     
+            <Banner></Banner>
+            <div className="row ml-3">
+           {(org.length > 0) && 
+            org.map(orgs => <Organization orgs={orgs} key={orgs.id}></Organization>)     
             }
+           </div>
         </div>
     );
 };

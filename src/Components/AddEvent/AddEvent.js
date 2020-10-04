@@ -1,7 +1,9 @@
 import React from 'react';
 
 
+
 const AddEvent = () => {
+    // to create organization database
     const handleAddOrganization = () =>{
        
         fetch('http://localhost:5000/addOrganization', {

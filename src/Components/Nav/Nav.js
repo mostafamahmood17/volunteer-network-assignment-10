@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { OrganizationContext } from '../../App';
 import logo from '../../logos/Group1329.png'
 
 const Nav = () => {
+    const [org, setOrg, loggedInUser, setLoggedInUser] = useContext(OrganizationContext)
     return (
         <div>
 
@@ -14,9 +16,9 @@ const Nav = () => {
 
 
                     <div className="collapse navbar-collapse" id="navbarNav">
-                        <ul className="navbar-nav ml-auto">
+                        <ul className="navbar-nav mr-auto">
                             <li className="nav-item mr-5">
-                                <span className="nav-link">Home</span>
+                                <Link to="/"><span className="nav-link">Home</span></Link>
                             </li>
                             <li className="nav-item mr-5">
                                 <span className="nav-link">Donation</span>
@@ -28,11 +30,16 @@ const Nav = () => {
                                 <span className="nav-link">Blog</span>
                             </li>
                             <li className="nav-item mr-5">
-                                <span className="d-flex justify-content-end"><button className="btn btn-primary nav-link text-white">Register</button></span>
+                                {loggedInUser.email?
+                                   <div className="d-flex justify-content-end btn btn-primary nav-link text-white">{loggedInUser.name}</div>:
+                                    <Link to="/login" className="d-flex justify-content-start"><button className="btn btn-primary nav-link text-white">Register</button></Link>
+                                }
                             </li>
-                            <li className="nav-item mr-5">
-                                <Link to="/addevent"><span className="d-flex justify-content-end"><button className="btn btn-dark nav-link text-white">Admin</button></span></Link>
-                            </li>
+                            <li>
+             
+                                 <Link to="/admin"><span className="d-flex justify-content-start"><div className="btn btn-dark nav-link text-white">Admin</div></span></Link>
+                             
+                             </li>
                         </ul>
                     </div>
               </nav>
