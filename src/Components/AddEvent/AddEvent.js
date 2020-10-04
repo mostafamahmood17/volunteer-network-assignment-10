@@ -6,7 +6,7 @@ const AddEvent = () => {
     // to create organization database
     const handleAddOrganization = () =>{
        
-        fetch('http://localhost:5000/addOrganization', {
+        fetch('https://morning-coast-77135.herokuapp.com/addOrganization', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify()

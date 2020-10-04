@@ -9,7 +9,7 @@ const Home = () => {
     const [org, setOrg, loggedInUser, setLoggedInUser] = useContext(OrganizationContext);
      
     useEffect(() => {
-        fetch('http://localhost:5000/organizations')
+        fetch('https://morning-coast-77135.herokuapp.com/organizations')
           .then(res => res.json())
           .then(data => setOrg(data))
       }, [])

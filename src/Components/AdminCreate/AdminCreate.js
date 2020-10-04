@@ -30,7 +30,7 @@ const AdminCreate = () => {
        
         const info = {description, name, date, date, image, color, id};
         
-        fetch('http://localhost:5000/addOrganization', {
+        fetch('https://morning-coast-77135.herokuapp.com/addOrganization', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(info)
@@ -38,7 +38,7 @@ const AdminCreate = () => {
     .then(res =>res.json())
     .then(data => {
         console.log(data);
-        
+        alert("Event Created");
     })
 
 }
