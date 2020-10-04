@@ -11,7 +11,7 @@ const UserContibutions = () => {
         fetch('http://localhost:5000/userorg?email='+loggedInUser.email)
             .then(res => res.json())
             .then(data => setUserParticipation(data))
-    },[loggedInUser.email])
+    },[userParticipation])
     
     const deleteProduct = (id) => {
         fetch(`http://localhost:5000/delete/${id}`, {
@@ -19,10 +19,8 @@ const UserContibutions = () => {
          })
          .then(res => res.json())
          .then(result => {
-            console.log(result)
             const newList=userParticipation.filter(u => u.id !== id)
             setUserParticipation(newList)
-
          })
     }
 

@@ -24,6 +24,7 @@ const Admin = () => {
          .then(result => {
             const newList = allUser.filter(u => u.id !== id)
             setNewList(newList)
+            console.log(result)
 
          })
     }
