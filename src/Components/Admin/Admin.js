@@ -9,12 +9,12 @@ const Admin = () => {
     // admin first page users display
 
     const [allUser, setAllUser] = useState([]);
-    const [newList, setNewList] = useState([]);
+    
     useEffect(() => {
         fetch('https://morning-coast-77135.herokuapp.com/admin')
             .then(res => res.json())
             .then(data => setAllUser(data))
-    }, [allUser])
+    }, [])
 
     const deleteProduct = (id) => {
         fetch(`https://morning-coast-77135.herokuapp.com/delete/${id}`, {
@@ -22,9 +22,11 @@ const Admin = () => {
         })
             .then(res => res.json())
             .then(result => {
-                const newList = allUser.filter(u => u.id !== id)
-                setNewList(newList)
-                console.log(result)
+                if(result){
+                const newUser = allUser.filter(u => u._id !== id)
+                setAllUser(newUser)
+                console.log(allUser)
+                }
 
             })
     }
@@ -52,7 +54,7 @@ const Admin = () => {
                             <th scope="col">Action</th>
                             </tr>
                         </thead>
-                      { allUser && allUser.map (user => <tbody>
+                      { allUser && allUser.map (user => <tbody key={user._id}>
                             <tr>
                             <th scope="row">{user.userName}</th>
                             <td>{user.email}</td>

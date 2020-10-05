@@ -12,16 +12,20 @@ const UserContibutions = () => {
         fetch('https://morning-coast-77135.herokuapp.com/userorg?email=' + loggedInUser.email)
             .then(res => res.json())
             .then(data => setUserParticipation(data))
-    }, [userParticipation])
-
+    }, [loggedInUser.email])
+    
     const deleteProduct = (id) => {
         fetch(`https://morning-coast-77135.herokuapp.com/delete/${id}`, {
             method: 'DELETE'
         })
             .then(res => res.json())
             .then(result => {
-                const newList = userParticipation.filter(u => u.id !== id)
+                if(result){
+                const newList = userParticipation.filter(u => u._id !== id)
+                console.log(userParticipation)
                 setUserParticipation(newList)
+                }
+                
             })
     }
 
