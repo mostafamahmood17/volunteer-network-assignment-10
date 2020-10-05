@@ -1,9 +1,7 @@
 import React from 'react';
 
-
-
 const AddEvent = () => {
-    // to create organization database at frist
+    //not in use just to create organization database at frist
     const handleAddOrganization = () =>{
        
         fetch('https://morning-coast-77135.herokuapp.com/addOrganization', {
