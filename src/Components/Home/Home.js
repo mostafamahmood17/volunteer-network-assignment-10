@@ -9,12 +9,14 @@ const Home = () => {
     const [org, setOrg, loggedInUser, setLoggedInUser] = useContext(OrganizationContext);
      
     useEffect(() => {
+        // front page
         fetch('https://morning-coast-77135.herokuapp.com/organizations')
           .then(res => res.json())
           .then(data => setOrg(data))
       }, [])
     return (
         <div>
+          
             <Nav></Nav>
             <Banner></Banner>
             <div className="row ml-3">
@@ -22,6 +24,7 @@ const Home = () => {
             org.map(orgs => <Organization orgs={orgs} key={orgs.id}></Organization>)     
             }
            </div>
+           
         </div>
     );
 };

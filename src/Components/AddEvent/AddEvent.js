@@ -3,7 +3,7 @@ import React from 'react';
 
 
 const AddEvent = () => {
-    // to create organization database
+    // to create organization database at frist
     const handleAddOrganization = () =>{
        
         fetch('https://morning-coast-77135.herokuapp.com/addOrganization', {
@@ -16,7 +16,6 @@ const AddEvent = () => {
     return (
         <div>
             <button onClick={handleAddOrganization}>Add product</button>
-            
         </div>
     );
 };

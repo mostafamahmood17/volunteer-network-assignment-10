@@ -7,6 +7,7 @@ const Banner = () => {
         paddingBottom:"4px"
     }
     return (
+        // search bar front page
         <div className="text-center">
             <div>
                 <h1>I GROW BY HELPING PEOPLE IN NEED</h1>

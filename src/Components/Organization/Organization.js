@@ -1,12 +1,12 @@
-import React, { useContext } from 'react';
+import React  from 'react';
 import { useHistory } from 'react-router-dom';
-import { OrganizationContext } from '../../App';
+
 
 
 
 const Organization = (props) => {
+    // new event create component
     const {name, image, id, color, description} = props.orgs;
-    const [org, setOrg, loggedInUser, setLoggedInUser] = useContext(OrganizationContext);
     const history = useHistory()
     function handleClick(id) {
         history.push(`/register/${id}`);
@@ -14,7 +14,7 @@ const Organization = (props) => {
     
     return (
        <div className="col-lg-3 col-md-6 col-sm-12">
-        <div className="" onClick={()=>handleClick(id)}>
+        <div onClick={()=>handleClick(id)}>
             
              <div >
                  <div className="m-2"> 

@@ -1,4 +1,4 @@
-import React, { createContext, useEffect, useState } from 'react';
+import React, { createContext, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {
   BrowserRouter as Router,
@@ -25,7 +25,7 @@ function App() {
   const [loggedInUser, setLoggedInUser] = useState({});
 
 
- 
+
 
   return (
     <OrganizationContext.Provider value={[org, setOrg, loggedInUser, setLoggedInUser]}>
@@ -41,19 +41,19 @@ function App() {
             <SelectForm />
           </PrivateRoute>
           <Route path="/contributions">
-            <UserContibutions/>
+            <UserContibutions />
           </Route>
           <Route path="/admin">
-            <Admin/>
+            <Admin />
           </Route>
           <Route path="/orgcreate">
-            <AdminCreate/>
+            <AdminCreate />
           </Route>
           <Route path="/home">
-            <Home/>
+            <Home />
           </Route>
           <Route exact path="/">
-            <Home/>
+            <Home />
           </Route>
           <Route path="*">
             <NotMatch />

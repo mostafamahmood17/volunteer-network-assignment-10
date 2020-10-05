@@ -1,53 +1,73 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { OrganizationContext } from '../../App';
 import logo from "../../logos/Group1329.png";
 import plus from "../../logos/plus 1.png";
 import icon from "../../logos/users-alt 1.png"
-import UserList from '../UserList/UserList';
+import clear from '../../logos/trash-29.png'
 
 const Admin = () => {
+    // admin first page users display
+
     const [allUser, setAllUser] = useState([]);
     const [newList, setNewList] = useState([]);
-    const [org, setOrg, loggedInUser, setLoggedInUser] = useContext(OrganizationContext)
     useEffect(() => {
         fetch('https://morning-coast-77135.herokuapp.com/admin')
             .then(res => res.json())
             .then(data => setAllUser(data))
     }, [allUser])
-    
+
     const deleteProduct = (id) => {
         fetch(`https://morning-coast-77135.herokuapp.com/delete/${id}`, {
             method: 'DELETE'
-         })
-         .then(res => res.json())
-         .then(result => {
-            const newList = allUser.filter(u => u.id !== id)
-            setNewList(newList)
-            console.log(result)
+        })
+            .then(res => res.json())
+            .then(result => {
+                const newList = allUser.filter(u => u.id !== id)
+                setNewList(newList)
+                console.log(result)
 
-         })
+            })
     }
 
     return (
-     <div className="container mt-2">
-        <div className="row">
-        <div className="col-lg-4 col-sm-12">
-              <div>
-                  <Link to='/'><img src={logo} width="120px" height="50px" alt=""/></Link>
-                  <br/>
-                  <Link to='/admin'><p className="wordWrap mt-3"><img src={icon} alt="" width="20px" height="20px"/> Volunter register list</p></Link>
-                  <Link to='/orgcreate'><h4><img src={plus} alt="" width="20px" height="20px"/> Add event</h4></Link>
-              </div>
+        <div className="container mt-2">
+            <div className="row">
+                <div className="col-lg-4 col-sm-12">
+                    <div>
+                        <Link to='/'><img src={logo} width="120px" height="50px" alt="" /></Link>
+                        <br />
+                        <Link to='/admin'><p className="mt-3"><img src={icon} alt="" width="20px" height="20px" /> Volunter register list</p></Link>
+                        <Link to='/orgcreate'><h4><img src={plus} alt="" width="20px" height="20px" /> Add event</h4></Link>
+                    </div>
+                </div>
+                <div className="col-lg-8 col-sm-12">
+
+                    <table className="table table-white">
+                        <thead>
+                            <tr>
+                            <th scope="col">Name</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Registering Date</th>
+                            <th scope="col">Organization Name</th>
+                            <th scope="col">Action</th>
+                            </tr>
+                        </thead>
+                      { allUser && allUser.map (user => <tbody>
+                            <tr>
+                            <th scope="row">{user.userName}</th>
+                            <td>{user.email}</td>
+                            <td>{user.date}</td>
+                            <td>{user.orgName}</td>
+                            
+                            <td><button onClick={()=>deleteProduct(user._id)} className="btn btn-danger"><img src={clear} width="30px" height="20px" alt=""/></button></td>
+                            </tr>
+                        </tbody>)}
+                    </table>
+
+                </div>
+
             </div>
-            <div className="col-lg-8 col-sm-12">
-            {
-            allUser && allUser.map(user=><UserList deleteProduct={deleteProduct} key={user._id} user={user}></UserList>)
-            }
-            </div>
-            
         </div>
-    </div>
     );
 };
 

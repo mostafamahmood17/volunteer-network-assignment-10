@@ -4,6 +4,7 @@ import { OrganizationContext } from '../../App';
 import logo from '../../logos/Group1329.png'
 
 const Nav = () => {
+    // nav component
     const [org, setOrg, loggedInUser, setLoggedInUser] = useContext(OrganizationContext)
     return (
         <div>
@@ -21,17 +22,17 @@ const Nav = () => {
                                 <Link to="/"><span className="nav-link">Home</span></Link>
                             </li>
                             <li className="nav-item mr-5">
-                                <span className="nav-link">Donation</span>
+                                <Link to="/"><span className="nav-link">Donation</span></Link>
                             </li>
                             <li className="nav-item mr-5">
-                                <span className="nav-link">Event</span>
+                                <Link to="/"><span className="nav-link">Event</span></Link>
                             </li>
                             <li className="nav-item mr-5">
-                                <span className="nav-link">Blog</span>
+                                <Link to="/"><span className="nav-link">Blog</span></Link>
                             </li>
                             <li className="nav-item mr-5">
                                 {loggedInUser.email?
-                                   <div className="d-flex justify-content-end btn btn-primary nav-link text-white">{loggedInUser.name}</div>:
+                                   <div className="justify-content-start nav-link text-dark">{loggedInUser.name}</div>:
                                     <Link to="/login" className="d-flex justify-content-start"><button className="btn btn-primary nav-link text-white">Register</button></Link>
                                 }
                             </li>

@@ -2,10 +2,11 @@ import React from 'react';
 import clear from '../../logos/trash-29.png'
 
 const UserList = (props) => {
+    // not in use dummi table component
     
-    const {name, email, date, _id, orgName} = props.user;
+    const {userName, email, date, _id, orgName} = props.user;
    
-    console.log(props.deleteProduct)
+    
     return (
         <div>
                 <h1>Volunter register list</h1>
@@ -25,7 +26,7 @@ const UserList = (props) => {
                        
                         
                         <tr>
-                           <th scope="row">{name}</th>
+                           <th scope="row">{userName}</th>
                             <td>{email}</td>
                             <td>{date}</td>
                             <td>{orgName}</td>

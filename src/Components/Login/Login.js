@@ -13,8 +13,8 @@ const Login = () => {
     const { from } = location.state || { from: { pathname: "/" } };
     if (firebase.apps.length === 0) {
         firebase.initializeApp(firebaseConfig);
-    }
-    ;
+    };
+    
     const handleGoogleSignIn = () => {
         var provider = new firebase.auth.GoogleAuthProvider();
 

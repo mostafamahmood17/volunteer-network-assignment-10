@@ -1,9 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Link, useHistory, useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import { OrganizationContext } from '../../App';
 import logo from '../../logos/Group1329.png'
 
 const SelectForm = () => {
+    // user sign in from for event
     const history = useHistory();
     const [org, setOrg, loggedInUser, setLoggedInUser] = useContext(OrganizationContext);
     const [selectedDate, setSelectedDate] = useState({
@@ -47,7 +48,7 @@ const SelectForm = () => {
     const {id} = useParams();
 
     useEffect(()  => {
-        const selectedOrganization = org.find(orgs => orgs.id == id)
+        const selectedOrganization = org && org.find(orgs => orgs.id == id)
         setOrg(selectedOrganization)
     },[])
 
@@ -61,8 +62,8 @@ const SelectForm = () => {
         overflow: "hidden",
         borderRadius: "5px",
         position:"absolute",
-        left:"20%",
-        right:"20%",
+        left:"10%",
+        right:"10%",
         top:"30%"
     };
     const imageStyle={
@@ -99,7 +100,6 @@ const SelectForm = () => {
                 <input id="orgName" type="text" defaultValue={org && org.name} name="orgName"/>
                 <input className="d-none" id ="id" type="text" defaultValue={org && org.id} name="id"/>
                 <input className="d-none" id ="image" type="text" defaultValue={org && org.image} name="image"/>
-                
                 <br/>
                 <button className="btn btn-primary" type="submit">Submit</button>
             </form>
