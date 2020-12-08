@@ -9,13 +9,13 @@ const UserContibutions = () => {
 
 
     useEffect(() => {
-        fetch('https://morning-coast-77135.herokuapp.com/userorg?email=' + loggedInUser.email)
+        fetch('http://localhost:5000/userorg?email=' + loggedInUser.email)
             .then(res => res.json())
             .then(data => setUserParticipation(data))
     }, [loggedInUser.email])
     
     const deleteProduct = (id) => {
-        fetch(`https://morning-coast-77135.herokuapp.com/delete/${id}`, {
+        fetch(`http://localhost:5000/delete/${id}`, {
             method: 'DELETE'
         })
             .then(res => res.json())

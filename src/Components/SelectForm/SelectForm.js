@@ -10,6 +10,14 @@ const SelectForm = () => {
     const [selectedDate, setSelectedDate] = useState({
         newDate : new Date()
     })
+    const {id} = useParams();
+   
+    useEffect(()  => {
+        const selectedOrganization = org && org.find(orgs => orgs.id == id)
+        setOrg(selectedOrganization)
+       
+    },[])
+   
 
     const handleDate = (e) =>{
         const {name, value} = e.target;
@@ -25,12 +33,14 @@ const SelectForm = () => {
         const email = document.getElementById("email").value;
         const date = document.getElementById("date").value;
         const orgName = document.getElementById("orgName").value;
-        const id = document.getElementById("id").value;
+        const id= document.getElementById("id").value;
         const image = document.getElementById("image").value;
 
         const info = {userName, email, date, orgName, id, image};
+
         
-        fetch('https://morning-coast-77135.herokuapp.com/addorg',{
+        
+        fetch('http://localhost:5000/addorg',{
             method: 'POST',
             headers: {'Content-Type' : 'application/json'},
             body: JSON.stringify(info)
@@ -39,18 +49,14 @@ const SelectForm = () => {
     .then(data => {
         console.log(data);
         history.push('/contributions');
+        
 
     })
-
-}
-
     
-    const {id} = useParams();
+} 
 
-    useEffect(()  => {
-        const selectedOrganization = org && org.find(orgs => orgs.id == id)
-        setOrg(selectedOrganization)
-    },[])
+
+   
 
     const logInStyle = {
         textAlign: "center",
@@ -82,6 +88,7 @@ const SelectForm = () => {
     }
     
     return (
+        
         <div  style={backgroundStyle} >
         <div className="text-center">
         <img style={imageStyle} src={logo} alt=""/>
@@ -97,15 +104,33 @@ const SelectForm = () => {
                 <br/>
                 <input id="date" type="date" format="MM/dd/yyyy" onChange={handleDate} name="date"/>
                 <br/>
-                <input id="orgName" type="text" defaultValue={org && org.name} name="orgName"/>
-                <input className="d-none" id ="id" type="text" defaultValue={org && org.id} name="id"/>
-                <input className="d-none" id ="image" type="text" defaultValue={org && org.image} name="image"/>
+                
+                {org ?
+                 <input id="orgName" type="text" defaultValue={org && org.name} name="orgName"/> 
+                 :
+                <input id="orgName" type="text" placeholder="organization name" name="orgName"/>
+                }
+                {
+                    org ?
+                    <input className="d-none" id ="id" type="text" defaultValue={org && org.id} name="id"/>
+                :
+                  <input className="d-none" id ="id" type="text" placeholder="123" name="id"/>
+                  }
+                {
+                    org ?
+                    <input className="d-none" id ="image" type="text" defaultValue={org && org.image} name="image"/>
+                    :
+                    <input className="d-none" id ="image" type="text" placeholder="https://i.imgur.com/C5OIM9N.png" name="image"/>
+                }
+              
+                
                 <br/>
                 <button className="btn btn-primary" type="submit">Submit</button>
             </form>
         </div>
     </div>
     </div>
+        
     );
 };
 
