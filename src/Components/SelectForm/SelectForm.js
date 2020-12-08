@@ -40,7 +40,7 @@ const SelectForm = () => {
 
         
         
-        fetch('http://localhost:5000/addorg',{
+        fetch('https://morning-coast-77135.herokuapp.com/addorg',{
             method: 'POST',
             headers: {'Content-Type' : 'application/json'},
             body: JSON.stringify(info)

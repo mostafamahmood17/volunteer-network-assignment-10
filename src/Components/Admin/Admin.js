@@ -11,13 +11,13 @@ const Admin = () => {
     const [allUser, setAllUser] = useState([]);
     
     useEffect(() => {
-        fetch('http://localhost:5000/admin')
+        fetch('https://morning-coast-77135.herokuapp.com/admin')
             .then(res => res.json())
             .then(data => setAllUser(data))
     }, [])
 
     const deleteProduct = (id) => {
-        fetch(`http://localhost:5000/delete/${id}`, {
+        fetch(`https://morning-coast-77135.herokuapp.com/delete/${id}`, {
             method: 'DELETE'
         })
             .then(res => res.json())
